@@ -42,6 +42,8 @@ namespace YumYumFood
         private void button4_Click(object sender, EventArgs e)
         {
             //통계관리 화면 띄우는 코드
+            SalesMain salesMain = new SalesMain();
+            salesMain.ShowDialog();
         }
     }
 }
