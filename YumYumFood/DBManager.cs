@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
-using System.Windows.Forms; 
+using System.Windows.Forms;  // 이 줄 추가
 
 public class DBManager
 {
     //공유 폴더의 ID와 password 참고, Nuget은 각자 다운로드 해야 함, DB가 폴더에 있어야 함
-    private static readonly string connectionString = "USER ID=;PASSWORD=;DATA SOURCE=localhost:1521/xe;";
+    private static readonly string connectionString = "USER ID=fooduser;PASSWORD=1111;DATA SOURCE=localhost:1521/xe;";
 
     public static OracleConnection GetConnection()
     {
         return new OracleConnection(connectionString);  // 매번 새로운 연결 생성
     }
-
 
     //출고 필요 데이터 임시로 넣어주기 위한 코드
     public static void InsertInitialData()
@@ -354,6 +353,29 @@ public class DBManager
         }
     }
 
+    // foodOutput과 foodCode 조합이 FoodOutRequire에 존재하는지 확인 241124추가
+    public static bool CheckOutputAndCodeExist(string foodOutput, string foodCode)
+    {
+        using (OracleConnection conn = GetConnection())
+        {
+            conn.Open();
+            using (OracleCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = @"
+                    SELECT COUNT(*) 
+                    FROM FoodOutRequire 
+                    WHERE foodOutput = :foodOutput 
+                    AND foodCode = :foodCode";
+
+                cmd.Parameters.Add(new OracleParameter("foodOutput", foodOutput));
+                cmd.Parameters.Add(new OracleParameter("foodCode", foodCode));
+
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                return count > 0;
+            }
+        }
+    }
+
     // foodQuantity 조회
     public static int GetFoodQuantity(string foodCode)
     {
@@ -421,7 +443,7 @@ public class DBManager
         return dt;
     }
 
-    //출고 완료 시 FOodDB재고 변경
+    //출고 완료 시 FoodDB재고 변경
     public static void UpdateFoodQuantity(string foodCode, int decreaseAmount)
     {
         using (OracleConnection conn = GetConnection())
@@ -442,5 +464,21 @@ public class DBManager
         }
     }
 
+    //활성화 비활성화에 사용(출고처 내역) 241124추가
+    public static bool CheckOutputExists(string foodOutput)
+    {
+        using (OracleConnection conn = GetConnection())
+        {
+            conn.Open();
+            using (OracleCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "SELECT COUNT(*) FROM FoodOutRequire WHERE foodOutput = :foodOutput";
+                cmd.Parameters.Add(new OracleParameter("foodOutput", foodOutput));
+
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                return count > 0;
+            }
+        }
+    }
 
 }

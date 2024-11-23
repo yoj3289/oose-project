@@ -29,6 +29,9 @@ namespace YumYumFood
         private bool isValidFoodCode = false;
         private bool isValidQuantity = false;
 
+        private bool isValidOutputCode = false;  // foodOutput과 foodCode 조합이 유효한지 확인, 241124추가
+
+
         public FoodOutput_Process()
         {
             InitializeComponent();
@@ -36,6 +39,7 @@ namespace YumYumFood
             // TextBox 이벤트 연결
             foodCode.TextChanged += FoodCode_TextChanged;
             foodQuantity.TextChanged += FoodQuantity_TextChanged;
+            foodOutput.TextChanged += foodOutput_TextChanged;  // 새로운 이벤트 연결
 
             // 초기 상태는 비활성화
             button1.Enabled = false;
@@ -191,7 +195,13 @@ namespace YumYumFood
                         // 10. DataGridView 새로고침
                         LoadData();
 
-                        MessageBox.Show("출고 처리가 완료되었습니다.");
+                        //MessageBox.Show("출고 처리가 완료되었습니다.");
+
+                        using (FoodOutputSuccessPopup popup = new FoodOutputSuccessPopup())
+                        {
+                            popup.ShowDialog(this);  // Modal 형태로 표시
+                        }
+
                     }
                     catch (Exception ex)
                     {
@@ -212,36 +222,46 @@ namespace YumYumFood
 
         }
 
-        //코드와 수량 입력할 때 출고 가능여부로 버튼 활성화/비활성화
+        //코드와 수량 입력할 때 출고 가능여부로 버튼 활성화/비활성화 241124수정
         private void FoodCode_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(foodCode.Text))
             {
                 isValidFoodCode = false;
+                foodCode.BackColor = SystemColors.Window;
+                toolTip1.SetToolTip(foodCode, "");
             }
             else
             {
                 isValidFoodCode = DBManager.CheckFoodCodeExists(foodCode.Text);
+                if (!isValidFoodCode)
+                {
+                    foodCode.BackColor = Color.LightPink;
+                    toolTip1.SetToolTip(foodCode, "해당 코드는 존재하지 않습니다.");
+                }
+                else
+                {
+                    foodCode.BackColor = SystemColors.Window;
+                    toolTip1.SetToolTip(foodCode, "");
+                }
             }
-
+            CheckOutputAndCode();
             UpdateButtonState();
         }
 
         private void FoodQuantity_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(foodQuantity.Text) || string.IsNullOrWhiteSpace(foodCode.Text))
+            if (string.IsNullOrWhiteSpace(foodQuantity.Text) ||
+         string.IsNullOrWhiteSpace(foodCode.Text) ||
+         string.IsNullOrWhiteSpace(foodOutput.Text))
             {
                 isValidQuantity = false;
             }
             else if (int.TryParse(foodQuantity.Text, out int inputQuantity))
             {
-                // FoodDB의 재고 수량 체크
                 int dbQuantity = DBManager.GetFoodQuantity(foodCode.Text);
-
-                // FoodOutRequire의 요청 수량 체크
                 int requireQuantity = DBManager.GetFoodOutRequireQuantity(foodOutput.Text, foodCode.Text);
 
-                // 입력 수량이 재고 수량보다 작고, 요청 수량보다 작거나 같아야 함
                 isValidQuantity = (inputQuantity <= dbQuantity) && (inputQuantity <= requireQuantity);
 
                 if (!isValidQuantity)
@@ -265,10 +285,24 @@ namespace YumYumFood
             UpdateButtonState();
         }
 
+        // Form의 검증 메서드들 수정 241124추가
+        private void CheckOutputAndCode()
+        {
+            if (string.IsNullOrWhiteSpace(foodOutput.Text) || string.IsNullOrWhiteSpace(foodCode.Text))
+            {
+                isValidOutputCode = false;
+            }
+            else
+            {
+                isValidOutputCode = DBManager.CheckOutputAndCodeExist(foodOutput.Text, foodCode.Text);
+            }
+            UpdateButtonState();
+        }
+
         private void UpdateButtonState()
         {
-            // 두 조건이 모두 true일 때만 버튼 활성화
-            button1.Enabled = isValidFoodCode && isValidQuantity;
+            // 모든 조건을 만족해야 버튼 활성화
+            button1.Enabled = isValidFoodCode && isValidQuantity && isValidOutputCode;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -278,7 +312,34 @@ namespace YumYumFood
 
         private void foodOutput_TextChanged(object sender, EventArgs e)
         {
-
+            if (string.IsNullOrWhiteSpace(foodOutput.Text))
+            {
+                foodOutput.BackColor = SystemColors.Window;
+                toolTip1.SetToolTip(foodOutput, "");
+            }
+            else
+            {
+                // 먼저 출고처가 FoodOutRequire에 존재하는지 확인
+                if (!DBManager.CheckOutputExists(foodOutput.Text))
+                {
+                    foodOutput.BackColor = Color.LightPink;
+                    toolTip1.SetToolTip(foodOutput, "출고 요청 내역에 없는 출고처입니다.");
+                }
+                // 출고처는 존재하지만 코드와의 조합이 맞지 않는 경우
+                else if (!string.IsNullOrWhiteSpace(foodCode.Text) &&
+                        !DBManager.CheckOutputAndCodeExist(foodOutput.Text, foodCode.Text))
+                {
+                    foodOutput.BackColor = Color.LightPink;
+                    toolTip1.SetToolTip(foodOutput, "해당 출고처의 식자재 요청이 아닙니다.");
+                }
+                else
+                {
+                    foodOutput.BackColor = SystemColors.Window;
+                    toolTip1.SetToolTip(foodOutput, "");
+                }
+            }
+            CheckOutputAndCode();
         }
     }
 }
+// foodOutput이 변경될 때마다 조합 체크 241124수정

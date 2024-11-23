@@ -98,18 +98,39 @@ namespace YumYumFood
             SearchFoodOutput(); // 검색 기능 실행
         }
 
+        // 검색창 포커스용
+        public void FocusSearchBox()
+        {
+            // 폼을 활성화하고 포커스 설정
+            this.Activate();
+            textBox1.Focus();
+            // 커서를 텍스트 끝으로 이동
+            textBox1.SelectionStart = textBox1.Text.Length;
+        }
+
         private void SearchFoodOutput()
         {
             try
             {
                 string searchText = textBox1.Text.Trim();
 
-                // 기존 데이터 모두 제거
-                table.Rows.Clear();
-
                 // DB에서 검색 결과 가져오기
                 DataTable searchResult = DBManager.SearchFoodOutput(searchText);
 
+                // 검색 결과가 없을 때의 처리 추가
+                if (searchResult.Rows.Count == 0)
+                {
+                    FoodOutputSearchPopup popup = new FoodOutputSearchPopup(this);
+                    if (popup.ShowDialog(this) == DialogResult.OK)
+                    {
+                        this.Activate();
+                        textBox1.Focus();
+                    }
+                    return; // 기존 데이터 유지
+                }
+
+                // 검색 결과가 있을 때만 데이터 업데이트
+                table.Rows.Clear();
                 UpdateDataGridView(searchResult);
             }
             catch (Exception ex)

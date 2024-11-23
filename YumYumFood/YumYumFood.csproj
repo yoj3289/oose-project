@@ -98,6 +98,18 @@
     <Compile Include="FoodOutputSearch.Designer.cs">
       <DependentUpon>FoodOutputSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="FoodOutputSearchPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FoodOutputSearchPopup.Designer.cs">
+      <DependentUpon>FoodOutputSearchPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FoodOutputSuccessPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FoodOutputSuccessPopup.Designer.cs">
+      <DependentUpon>FoodOutputSuccessPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="FoodOutput_Process.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,49 +129,55 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalesFoodGrowth.cs">
-    	<SubType>Form</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SalesFoodGrowth.Designer.cs">
       <DependentUpon>SalesFoodGrowth.cs</DependentUpon>
     </Compile>
     <Compile Include="SalesFoodStatistics.cs">
-    	<SubType>Form</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SalesFoodStatistics.Designer.cs">
       <DependentUpon>SalesFoodStatistics.cs</DependentUpon>
     </Compile>
     <Compile Include="SalesInputGrowth.cs">
-    	<SubType>Form</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SalesInputGrowth.Designer.cs">
       <DependentUpon>SalesInputGrowth.cs</DependentUpon>
     </Compile>
     <Compile Include="SalesInputStatistics.cs">
-    	<SubType>Form</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SalesInputStatistics.Designer.cs">
       <DependentUpon>SalesInputStatistics.cs</DependentUpon>
     </Compile>
     <Compile Include="SalesMain.cs">
-    	<SubType>Form</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SalesMain.Designer.cs">
       <DependentUpon>SalesMain.cs</DependentUpon>
     </Compile>
     <Compile Include="SalesOutputGrowth.cs">
-    	<SubType>Form</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SalesOutputGrowth.Designer.cs">
       <DependentUpon>SalesOutputGrowth.cs</DependentUpon>
     </Compile>
     <Compile Include="SalesOutputStatistics.cs">
-    	<SubType>Form</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="SalesOutputStatistics.Designer.cs">
       <DependentUpon>SalesOutputStatistics.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FoodOutputSearch.resx">
       <DependentUpon>FoodOutputSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FoodOutputSearchPopup.resx">
+      <DependentUpon>FoodOutputSearchPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FoodOutputSuccessPopup.resx">
+      <DependentUpon>FoodOutputSuccessPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FoodOutput_Process.resx">
       <DependentUpon>FoodOutput_Process.cs</DependentUpon>
