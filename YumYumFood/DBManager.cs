@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
-using System.Windows.Forms;
+using System.Windows.Forms; 
 
 public class DBManager
 {
-    //보안을 위해 db관련 내용은 비워둠, ID와 PASSWORD는 공유폴더 참고 
+    //공유 폴더의 ID와 password 참고, Nuget은 각자 다운로드 해야 함, DB가 폴더에 있어야 함
     private static readonly string connectionString = "USER ID=;PASSWORD=;DATA SOURCE=localhost:1521/xe;";
 
     public static OracleConnection GetConnection()

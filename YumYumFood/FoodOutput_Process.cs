@@ -126,13 +126,13 @@ namespace YumYumFood
             }
         }
 
-
         // Form의 button1_Click 이벤트
         private void button1_Click(object sender, EventArgs e)
         {
             foodOutputText = foodOutput.Text; //출고처 텍스트 박스 내용
             foodCodeText = foodCode.Text;
             foodQuantityText = int.Parse(foodQuantity.Text);
+            //foodPriceText= int.Parse(foodPrice.Text);
             foodOutDateText = foodOutDate.Text;
             try
             {
@@ -269,6 +269,16 @@ namespace YumYumFood
         {
             // 두 조건이 모두 true일 때만 버튼 활성화
             button1.Enabled = isValidFoodCode && isValidQuantity;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void foodOutput_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
