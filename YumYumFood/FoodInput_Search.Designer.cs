@@ -58,6 +58,7 @@
             this.Submit.Size = new System.Drawing.Size(27, 26);
             this.Submit.TabIndex = 42;
             this.Submit.UseVisualStyleBackColor = true;
+            this.Submit.Click += new System.EventHandler(this.Submit_Click);
             // 
             // label6
             // 

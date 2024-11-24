@@ -35,8 +35,8 @@ namespace YumYumFood
                 string foodInput = foodInput_text.Text.Trim();
                 string foodName = foodName_text.Text.Trim();
                 string foodInQuantity = foodInQuantity_text.Text.Trim();
-                string connectionString = "USER ID=fooduser;PASSWORD=1111;DATA SOURCE=localhost:1521/xe;";
-                //string connectionString = "User Id=fooduser;Password=1111;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)))";
+                //string connectionString = "USER ID=fooduser;PASSWORD=1111;DATA SOURCE=localhost:1521/xe;";
+                string connectionString = "User Id=fooduser;Password=1111;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)))";
                 // SQL INSERT 문
                 string insertQuery = @"
                     INSERT INTO FoodInputDB (
