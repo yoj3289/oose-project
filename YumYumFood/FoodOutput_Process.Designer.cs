@@ -53,6 +53,7 @@
             this.button2.TabIndex = 25;
             this.button2.Text = "취소";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -63,6 +64,7 @@
             this.button1.TabIndex = 24;
             this.button1.Text = "확인";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView1
             // 
@@ -159,6 +161,7 @@
             this.label2.Size = new System.Drawing.Size(135, 32);
             this.label2.TabIndex = 14;
             this.label2.Text = "식자재번호";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
             // 
@@ -169,6 +172,7 @@
             this.label1.Size = new System.Drawing.Size(87, 32);
             this.label1.TabIndex = 13;
             this.label1.Text = "출고처";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // FoodOutput_Process
             // 
