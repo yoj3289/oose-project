@@ -19,7 +19,6 @@ public class DBManager
         return new OracleConnection(connectionString);  // 매번 새로운 연결 생성
     }
 
-    //출고 필요 데이터 임시로 넣어주기 위한 코드
     public static void InsertInitialData()
     {
         using (OracleConnection conn = GetConnection())
@@ -43,26 +42,24 @@ public class DBManager
                     cmd.CommandText = "DELETE FROM FoodDB";
                     cmd.ExecuteNonQuery();
 
-                    // FoodDB 데이터 삽입
-                    cmd.CommandText = "INSERT INTO FoodDB VALUES ('00001', '양상추', 250, 2000, TO_DATE('2024-12-31', 'YYYY-MM-DD'))";
+                    // FoodInputDB 데이터 삽입
+                    cmd.CommandText = "INSERT INTO FoodInputDB VALUES(1, TO_DATE('2024-11-10', 'YYYY-MM-DD'), '우리과수원', 'F001', '사과', 100, 1500, TO_DATE('2024-11-20', 'YYYY-MM-DD'))";
                     cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodDB VALUES ('00002', '배추', 300, 3000, TO_DATE('2024-12-31', 'YYYY-MM-DD'))";
+                    cmd.CommandText = "INSERT INTO FoodInputDB VALUES(2, TO_DATE('2024-11-13', 'YYYY-MM-DD'), '꿀꿀농장', 'F002', '삼겹살', 250, 3500, TO_DATE('2024-11-25', 'YYYY-MM-DD'))";
                     cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodDB VALUES ('00003', '당근', 280, 4000, TO_DATE('2024-12-31', 'YYYY-MM-DD'))";
+                    cmd.CommandText = "INSERT INTO FoodInputDB VALUES(3, TO_DATE('2024-11-16', 'YYYY-MM-DD'), '토끼정원', 'F003', '당근', 300, 2500, TO_DATE('2024-11-27', 'YYYY-MM-DD'))";
                     cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodDB VALUES ('00004', '삼겹살', 370, 3500, TO_DATE('2024-12-31', 'YYYY-MM-DD'))";
+                    cmd.CommandText = "INSERT INTO FoodInputDB VALUES(4, TO_DATE('2024-11-20', 'YYYY-MM-DD'), '우리농장', 'F004', '양파', 250, 2000, TO_DATE('2024-11-30', 'YYYY-MM-DD'))";
                     cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodDB VALUES ('00005', '양파', 400, 4200, TO_DATE('2024-12-31', 'YYYY-MM-DD'))";
-                    cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodDB VALUES ('00006', '목살', 290, 5000, TO_DATE('2024-12-31', 'YYYY-MM-DD'))";
+                    cmd.CommandText = "INSERT INTO FoodInputDB VALUES(5, TO_DATE('2024-11-25', 'YYYY-MM-DD'), '음메목장', 'F005', '우유', 400, 3000, TO_DATE('2024-11-30', 'YYYY-MM-DD'))";
                     cmd.ExecuteNonQuery();
 
                     // FoodOutRequire 데이터 삽입
-                    cmd.CommandText = "INSERT INTO FoodOutRequire VALUES ('00001', '2024-11-19', '양상추', '세종상사', 150)";
+                    cmd.CommandText = "INSERT INTO FoodOutRequire VALUES ('F001', '2024-11-19', '사과', '세종상사', 150)";
                     cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodOutRequire VALUES ('00003', '2024-11-20', '당근', '대한맛집', 250)";
+                    cmd.CommandText = "INSERT INTO FoodOutRequire VALUES ('F003', '2024-11-20', '당근', '대한맛집', 250)";
                     cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodOutRequire VALUES ('00004', '2024-11-21', '삼겹살', '우리고기', 350)";
+                    cmd.CommandText = "INSERT INTO FoodOutRequire VALUES ('F005', '2024-11-21', '우유', '우리고기', 350)";
                     cmd.ExecuteNonQuery();
 
                     // 트랜잭션 커밋
@@ -76,8 +73,6 @@ public class DBManager
         }
     }
 
-
-    //출고 필요 목록 불러오기 위한 쿼리문
     public static DataTable GetFoodOutRequireData()
     {
         DataTable dt = new DataTable();
@@ -87,29 +82,24 @@ public class DBManager
             using (OracleCommand cmd = new OracleCommand())
             {
                 cmd.Connection = conn;
-                cmd.CommandText = "SELECT r.foodOutput, r.foodCode, r.foodOutQuantity, f.foodOutPrice FROM FoodOutRequire r JOIN FoodDB f ON r.foodCode = f.foodCode";
+                cmd.CommandText = "SELECT r.foodOutput, r.foodCode, r.foodOutQuantity, i.foodInPrice as foodOutPrice FROM FoodOutRequire r JOIN FoodInputDB i ON r.foodCode = i.foodCode";
                 try
                 {
                     using (OracleDataReader reader = cmd.ExecuteReader())
                     {
-                        try
-                        {
-                            dt.Load(reader);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw new Exception("데이터 로드 실패: " + ex.Message);
-                        }
+                        dt.Load(reader);
                     }
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("데이터 읽기 실패: " + ex.Message);
+                    throw new Exception("데이터 로드 실패: " + ex.Message);
                 }
             }
         }
         return dt;
     }
+
+
 
     // FoodOutRequire의 수량 조회
     public static int GetFoodOutRequireQuantity(string foodOutput, string foodCode)
@@ -183,7 +173,7 @@ public class DBManager
             }
         }
     }
-    // FoodDB에서의 식자재명 조회(출고 파트에서 사용)
+
     public static string GetFoodNameByCode(string foodCode)
     {
         using (OracleConnection conn = GetConnection())
@@ -191,7 +181,7 @@ public class DBManager
             conn.Open();
             using (OracleCommand cmd = conn.CreateCommand())
             {
-                cmd.CommandText = "SELECT foodName FROM FoodDB WHERE foodCode = :foodCode";
+                cmd.CommandText = "SELECT foodName FROM FoodInputDB WHERE foodCode = :foodCode";
                 cmd.Parameters.Add(new OracleParameter("foodCode", foodCode));
 
                 object result = cmd.ExecuteScalar();
@@ -337,7 +327,7 @@ public class DBManager
         return dt;
     }
 
-    // foodCode 존재 여부 확인
+    // foodCode 존재 여부 확인 - FoodInputDB 기준으로 변경
     public static bool CheckFoodCodeExists(string foodCode)
     {
         using (OracleConnection conn = GetConnection())
@@ -345,9 +335,8 @@ public class DBManager
             conn.Open();
             using (OracleCommand cmd = conn.CreateCommand())
             {
-                cmd.CommandText = "SELECT COUNT(*) FROM FoodDB WHERE foodCode = :foodCode";
+                cmd.CommandText = "SELECT COUNT(*) FROM FoodInputDB WHERE foodCode = :foodCode";
                 cmd.Parameters.Add(new OracleParameter("foodCode", foodCode));
-
                 int count = Convert.ToInt32(cmd.ExecuteScalar());
                 return count > 0;
             }
@@ -444,7 +433,7 @@ public class DBManager
         return dt;
     }
 
-    //출고 완료 시 FoodDB재고 변경
+    //출고 완료 시 FOodDB재고 변경
     public static void UpdateFoodQuantity(string foodCode, int decreaseAmount)
     {
         using (OracleConnection conn = GetConnection())
@@ -465,7 +454,6 @@ public class DBManager
         }
     }
 
-    //활성화 비활성화에 사용(출고처 내역) 241124추가
     public static bool CheckOutputExists(string foodOutput)
     {
         using (OracleConnection conn = GetConnection())
@@ -482,4 +470,34 @@ public class DBManager
         }
     }
 
+    // 실제 재고 수량 계산을 위한 새로운 메서드
+    public static int GetActualFoodQuantity(string foodCode)
+    {
+        using (OracleConnection conn = GetConnection())
+        {
+            conn.Open();
+            using (OracleCommand cmd = conn.CreateCommand())
+            {
+                // 입고 수량 합계 조회
+                cmd.CommandText = @"
+                SELECT COALESCE(SUM(foodInQuantity), 0)
+                FROM FoodInputDB 
+                WHERE foodCode = :foodCode";
+                cmd.Parameters.Add(new OracleParameter("foodCode", foodCode));
+                int totalInput = Convert.ToInt32(cmd.ExecuteScalar());
+
+                // 출고 수량 합계 조회
+                cmd.Parameters.Clear();
+                cmd.CommandText = @"
+                SELECT COALESCE(SUM(foodQuantity), 0)
+                FROM FoodOutputDB 
+                WHERE foodCode = :foodCode";
+                cmd.Parameters.Add(new OracleParameter("foodCode", foodCode));
+                int totalOutput = Convert.ToInt32(cmd.ExecuteScalar());
+
+                // 실제 재고 = 입고 합계 - 출고 합계
+                return totalInput - totalOutput;
+            }
+        }
+    }
 }

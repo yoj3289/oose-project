@@ -93,7 +93,7 @@ namespace YumYumFood
             dataGridView1.DataSource = table;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             SearchFoodOutput(); // 검색 기능 실행
         }

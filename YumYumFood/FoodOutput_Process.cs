@@ -145,7 +145,7 @@ namespace YumYumFood
         }
 
         //더이상 FoodDB를 참고하지 않고 입고를 참조하도록 변경
-        private void button1_Click(object sender, EventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
         {
             foodOutputText = foodOutput.Text; //출고처 텍스트 박스 내용
             foodCodeText = foodCode.Text;
