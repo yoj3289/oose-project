@@ -1,4 +1,5 @@
-﻿using System;
+﻿//조건검사 변경 및 추가 함수 목록: FoodCode_TextChanged, FoodQuantity_TextChanged, button1_Click
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -118,6 +119,18 @@ namespace YumYumFood
         //테스트 과정에서 매번 run sql 로그인하기 번거롭기 때문에 출고 필요 데이터 항목 초기화 위함
         private void label2_Click(object sender, EventArgs e)
         {
+            /*try
+            {
+                DBManager.ResetAllTables();   
+                DBManager.InsertInitialData(); 
+                MessageBox.Show("전체 초기화 완료");
+                // 그리드뷰 새로고침
+                dataGridView1.DataSource = DBManager.GetFoodOutRequireData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("초기화 실패: " + ex.Message);
+            }*/
             try
             {
                 DBManager.ResetAllTables();
@@ -131,7 +144,7 @@ namespace YumYumFood
             }
         }
 
-        // Form의 button1_Click 이벤트
+        //더이상 FoodDB를 참고하지 않고 입고를 참조하도록 변경
         private void button1_Click(object sender, EventArgs e)
         {
             foodOutputText = foodOutput.Text; //출고처 텍스트 박스 내용
@@ -145,21 +158,16 @@ namespace YumYumFood
                 {
                     conn.Open();
                     OracleTransaction transaction = conn.BeginTransaction();
-
                     try
                     {
                         // 1. 현재 날짜로 ID prefix 생성
                         string datePrefix = DateTime.Now.ToString("yyMMdd");
-
                         // 2. 해당 날짜의 마지막 ID 조회
                         int count = DBManager.GetLastIdForDate(datePrefix);
-
                         // 3. 새로운 ID 생성
                         string newId = $"{datePrefix}{(count + 1):D2}";
-
                         // 4. 날짜 변환
                         DateTime outDate = DateTime.ParseExact(foodOutDateText, "yyyy/MM/dd", null);
-
                         // 5. foodName 조회
                         string foodName = DBManager.GetFoodNameByCode(foodCodeText);
                         if (string.IsNullOrEmpty(foodName))
@@ -168,11 +176,7 @@ namespace YumYumFood
                             return;
                         }
 
-                        // 6. FoodDB 수량 업데이트
-                        int outQuantity = foodQuantityText;
-                        DBManager.UpdateFoodQuantity(foodCodeText, outQuantity);
-
-                        // 7. FoodOutputDB에 데이터 삽입
+                        // 6. FoodOutputDB에 데이터 삽입
                         DBManager.InsertFoodOutput(
                             newId,
                             foodOutputText,
@@ -183,26 +187,24 @@ namespace YumYumFood
                             decimal.Parse(foodPrice.Text)
                         );
 
-                        // 8. FoodOutRequire에서 데이터 삭제 또는 업데이트
+                        // 7. FoodOutRequire에서 데이터 삭제 또는 업데이트
                         DBManager.ProcessFoodOutRequire(
                             foodOutputText,
                             foodCodeText,
-                            outQuantity
+                            foodQuantityText
                         );
 
-                        // 9. 트랜잭션 커밋
+                        // 8. 트랜잭션 커밋
                         transaction.Commit();
 
-                        // 10. DataGridView 새로고침
+                        // 9. DataGridView 새로고침
                         LoadData();
 
-                        //MessageBox.Show("출고 처리가 완료되었습니다.");
-
+                        // 10. 성공 메시지 표시
                         using (FoodOutputSuccessPopup popup = new FoodOutputSuccessPopup())
                         {
                             popup.ShowDialog(this);  // Modal 형태로 표시
                         }
-
                     }
                     catch (Exception ex)
                     {
@@ -223,7 +225,7 @@ namespace YumYumFood
 
         }
 
-        //코드와 수량 입력할 때 출고 가능여부로 버튼 활성화/비활성화 241124수정
+
         private void FoodCode_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(foodCode.Text))
@@ -238,7 +240,7 @@ namespace YumYumFood
                 if (!isValidFoodCode)
                 {
                     foodCode.BackColor = Color.LightPink;
-                    toolTip1.SetToolTip(foodCode, "해당 코드는 존재하지 않습니다.");
+                    toolTip1.SetToolTip(foodCode, "해당 코드로 입고된 이력이 없습니다.");
                 }
                 else
                 {
@@ -253,17 +255,19 @@ namespace YumYumFood
         private void FoodQuantity_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(foodQuantity.Text) ||
-         string.IsNullOrWhiteSpace(foodCode.Text) ||
-         string.IsNullOrWhiteSpace(foodOutput.Text))
+                string.IsNullOrWhiteSpace(foodCode.Text) ||
+                string.IsNullOrWhiteSpace(foodOutput.Text))
             {
                 isValidQuantity = false;
             }
             else if (int.TryParse(foodQuantity.Text, out int inputQuantity))
             {
-                int dbQuantity = DBManager.GetFoodQuantity(foodCode.Text);
+                // 실제 재고 수량 계산
+                int actualQuantity = DBManager.GetActualFoodQuantity(foodCode.Text);
+                // 출고 요청 수량
                 int requireQuantity = DBManager.GetFoodOutRequireQuantity(foodOutput.Text, foodCode.Text);
 
-                isValidQuantity = (inputQuantity <= dbQuantity) && (inputQuantity <= requireQuantity);
+                isValidQuantity = (inputQuantity <= actualQuantity) && (inputQuantity <= requireQuantity);
 
                 if (!isValidQuantity)
                 {
@@ -271,7 +275,7 @@ namespace YumYumFood
                     if (inputQuantity > requireQuantity)
                         toolTip1.SetToolTip(foodQuantity, $"요청 수량({requireQuantity})을 초과할 수 없습니다.");
                     else
-                        toolTip1.SetToolTip(foodQuantity, $"재고 수량({dbQuantity})을 초과할 수 없습니다.");
+                        toolTip1.SetToolTip(foodQuantity, $"가용 재고 수량({actualQuantity})을 초과할 수 없습니다.");
                 }
                 else
                 {

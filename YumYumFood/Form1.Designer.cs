@@ -47,6 +47,7 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "YumYumFood";
             this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.label1.DoubleClick += new System.EventHandler(this.label1_DoubleClick);
             // 
             // button1
             // 
@@ -54,7 +55,7 @@
             this.button1.Font = new System.Drawing.Font("세방고딕 Bold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button1.Location = new System.Drawing.Point(85, 151);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(131, 106);
+            this.button1.Size = new System.Drawing.Size(139, 106);
             this.button1.TabIndex = 1;
             this.button1.Text = "입고처리";
             this.button1.UseVisualStyleBackColor = false;
@@ -66,7 +67,7 @@
             this.button2.Font = new System.Drawing.Font("세방고딕 Bold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button2.Location = new System.Drawing.Point(391, 151);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(137, 106);
+            this.button2.Size = new System.Drawing.Size(139, 106);
             this.button2.TabIndex = 2;
             this.button2.Text = "출고처리";
             this.button2.UseVisualStyleBackColor = false;
@@ -100,9 +101,9 @@
             // 
             this.button5.BackColor = System.Drawing.Color.FloralWhite;
             this.button5.Font = new System.Drawing.Font("세방고딕 Bold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button5.Location = new System.Drawing.Point(222, 151);
+            this.button5.Location = new System.Drawing.Point(230, 151);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(146, 106);
+            this.button5.Size = new System.Drawing.Size(139, 106);
             this.button5.TabIndex = 5;
             this.button5.Text = "입고조회";
             this.button5.UseVisualStyleBackColor = false;
@@ -114,7 +115,7 @@
             this.button6.Font = new System.Drawing.Font("세방고딕 Bold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button6.Location = new System.Drawing.Point(534, 151);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(137, 106);
+            this.button6.Size = new System.Drawing.Size(139, 106);
             this.button6.TabIndex = 6;
             this.button6.Text = "출고조회";
             this.button6.UseVisualStyleBackColor = false;

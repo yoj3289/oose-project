@@ -73,5 +73,19 @@ namespace YumYumFood
             FoodInput_Search newform5 = new FoodInput_Search();
             newform5.Show();
         }
+
+        private void label1_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                DBManager.InsertInitialData();
+                MessageBox.Show("데이터 삽입 완료");
+                //LoadData(); // 데이터 그리드 새로고침
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("에러: " + ex.Message);
+            }
+        }
     }
 }
