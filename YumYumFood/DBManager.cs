@@ -72,7 +72,6 @@ public class DBManager
             }
         }
     }
-
     public static DataTable GetFoodOutRequireData()
     {
         DataTable dt = new DataTable();
@@ -218,7 +217,8 @@ public class DBManager
         }
     }
 
-    //출고 과정에 따라 출고 필요 목록을 수정하거나 삭제(일부 수량만 출고 완료 시 숫자 감소, 전체 완료시 삭제)
+
+    //241125 추가
     public static void ProcessFoodOutRequire(string foodOutput, string foodCode, int processQuantity)
     {
         using (OracleConnection conn = GetConnection())
@@ -226,7 +226,7 @@ public class DBManager
             conn.Open();
             using (OracleCommand cmd = conn.CreateCommand())
             {
-                // OracleTransaction을 매개변수로 받아서 사용
+                // 먼저 FoodOutRequire에 해당 출고처와 코드가 있는지 확인
                 cmd.CommandText = @"
                 SELECT foodOutQuantity 
                 FROM FoodOutRequire 
@@ -239,7 +239,7 @@ public class DBManager
 
                 using (OracleDataReader reader = cmd.ExecuteReader())
                 {
-                    if (reader.Read())
+                    if (reader.Read())  // FoodOutRequire에 있는 경우
                     {
                         int currentQuantity = Convert.ToInt32(reader["foodOutQuantity"]);
                         reader.Close();
@@ -252,9 +252,13 @@ public class DBManager
                             DELETE FROM FoodOutRequire 
                             WHERE foodOutput = :foodOutput 
                             AND foodCode = :foodCode";
-
                             cmd.Parameters.Add(new OracleParameter("foodOutput", foodOutput));
                             cmd.Parameters.Add(new OracleParameter("foodCode", foodCode));
+
+                            if (cmd.ExecuteNonQuery() == 0)
+                            {
+                                throw new Exception("FoodOutRequire 테이블 삭제 실패");
+                            }
                         }
                         else
                         {
@@ -270,17 +274,17 @@ public class DBManager
                             cmd.Parameters.Add(new OracleParameter("newQuantity", newQuantity));
                             cmd.Parameters.Add(new OracleParameter("foodOutput", foodOutput));
                             cmd.Parameters.Add(new OracleParameter("foodCode", foodCode));
-                        }
 
-                        int result = cmd.ExecuteNonQuery();
-                        if (result == 0)
-                        {
-                            throw new Exception("FoodOutRequire 테이블 업데이트/삭제 실패");
+                            if (cmd.ExecuteNonQuery() == 0)
+                            {
+                                throw new Exception("FoodOutRequire 테이블 업데이트 실패");
+                            }
                         }
                     }
-                    else
+                    else  // FoodOutRequire에 없는 경우
                     {
-                        throw new Exception("해당하는 출고 요청을 찾을 수 없습니다.");
+                        // 아무 작업도 하지 않고 그냥 리턴
+                        return;
                     }
                 }
             }

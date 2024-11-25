@@ -44,7 +44,7 @@ namespace YumYumFood
             foodOutput.TextChanged += foodOutput_TextChanged;  // 새로운 이벤트 연결
 
             // 초기 상태는 비활성화
-            button1.Enabled = false;
+            btnOk.Enabled = false;
 
         }
 
@@ -119,18 +119,7 @@ namespace YumYumFood
         //테스트 과정에서 매번 run sql 로그인하기 번거롭기 때문에 출고 필요 데이터 항목 초기화 위함
         private void label2_Click(object sender, EventArgs e)
         {
-            /*try
-            {
-                DBManager.ResetAllTables();   
-                DBManager.InsertInitialData(); 
-                MessageBox.Show("전체 초기화 완료");
-                // 그리드뷰 새로고침
-                dataGridView1.DataSource = DBManager.GetFoodOutRequireData();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("초기화 실패: " + ex.Message);
-            }*/
+
             try
             {
                 DBManager.ResetAllTables();
@@ -143,6 +132,7 @@ namespace YumYumFood
                 MessageBox.Show("초기화 실패: " + ex.Message);
             }
         }
+
 
         //더이상 FoodDB를 참고하지 않고 입고를 참조하도록 변경
         private void btnOk_Click(object sender, EventArgs e)
@@ -225,7 +215,6 @@ namespace YumYumFood
 
         }
 
-
         private void FoodCode_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(foodCode.Text))
@@ -252,6 +241,7 @@ namespace YumYumFood
             UpdateButtonState();
         }
 
+        //241125추가
         private void FoodQuantity_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(foodQuantity.Text) ||
@@ -264,23 +254,45 @@ namespace YumYumFood
             {
                 // 실제 재고 수량 계산
                 int actualQuantity = DBManager.GetActualFoodQuantity(foodCode.Text);
-                // 출고 요청 수량
-                int requireQuantity = DBManager.GetFoodOutRequireQuantity(foodOutput.Text, foodCode.Text);
 
-                isValidQuantity = (inputQuantity <= actualQuantity) && (inputQuantity <= requireQuantity);
+                // 출고처가 FoodOutRequire에 있는지 확인
+                bool existsInRequire = DBManager.CheckOutputExists(foodOutput.Text);
 
-                if (!isValidQuantity)
+                if (existsInRequire)
                 {
-                    foodQuantity.BackColor = Color.LightPink;
-                    if (inputQuantity > requireQuantity)
-                        toolTip1.SetToolTip(foodQuantity, $"요청 수량({requireQuantity})을 초과할 수 없습니다.");
+                    // 출고처가 있는 경우, 요청 수량도 체크
+                    int requireQuantity = DBManager.GetFoodOutRequireQuantity(foodOutput.Text, foodCode.Text);
+                    isValidQuantity = (inputQuantity <= actualQuantity) && (inputQuantity <= requireQuantity);
+
+                    if (!isValidQuantity)
+                    {
+                        foodQuantity.BackColor = Color.LightPink;
+                        if (inputQuantity > requireQuantity)
+                            toolTip1.SetToolTip(foodQuantity, $"요청 수량({requireQuantity})을 초과할 수 없습니다.");
+                        else
+                            toolTip1.SetToolTip(foodQuantity, $"가용 재고 수량({actualQuantity})을 초과할 수 없습니다.");
+                    }
                     else
-                        toolTip1.SetToolTip(foodQuantity, $"가용 재고 수량({actualQuantity})을 초과할 수 없습니다.");
+                    {
+                        foodQuantity.BackColor = SystemColors.Window;
+                        toolTip1.SetToolTip(foodQuantity, "");
+                    }
                 }
                 else
                 {
-                    foodQuantity.BackColor = SystemColors.Window;
-                    toolTip1.SetToolTip(foodQuantity, "");
+                    // 출고처가 없는 경우, 재고 수량만 체크
+                    isValidQuantity = (inputQuantity <= actualQuantity);
+
+                    if (!isValidQuantity)
+                    {
+                        foodQuantity.BackColor = Color.LightPink;
+                        toolTip1.SetToolTip(foodQuantity, $"가용 재고 수량({actualQuantity})을 초과할 수 없습니다.");
+                    }
+                    else
+                    {
+                        foodQuantity.BackColor = SystemColors.Window;
+                        toolTip1.SetToolTip(foodQuantity, "");
+                    }
                 }
             }
             else
@@ -290,7 +302,8 @@ namespace YumYumFood
             UpdateButtonState();
         }
 
-        // Form의 검증 메서드들 수정 241124추가
+
+        //require 의존도를 더 낮췄음 241125추가
         private void CheckOutputAndCode()
         {
             if (string.IsNullOrWhiteSpace(foodOutput.Text) || string.IsNullOrWhiteSpace(foodCode.Text))
@@ -299,7 +312,17 @@ namespace YumYumFood
             }
             else
             {
-                isValidOutputCode = DBManager.CheckOutputAndCodeExist(foodOutput.Text, foodCode.Text);
+                bool existsInRequire = DBManager.CheckOutputExists(foodOutput.Text);
+                if (existsInRequire)
+                {
+                    // 출고처가 FoodOutRequire에 있으면 코드 매칭 검사
+                    isValidOutputCode = DBManager.CheckOutputAndCodeExist(foodOutput.Text, foodCode.Text);
+                }
+                else
+                {
+                    // 출고처가 FoodOutRequire에 없으면 무조건 true
+                    isValidOutputCode = true;
+                }
             }
             UpdateButtonState();
         }
@@ -307,7 +330,7 @@ namespace YumYumFood
         private void UpdateButtonState()
         {
             // 모든 조건을 만족해야 버튼 활성화
-            button1.Enabled = isValidFoodCode && isValidQuantity && isValidOutputCode;
+            btnOk.Enabled = isValidFoodCode && isValidQuantity && isValidOutputCode;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -324,21 +347,27 @@ namespace YumYumFood
             }
             else
             {
-                // 먼저 출고처가 FoodOutRequire에 존재하는지 확인
-                if (!DBManager.CheckOutputExists(foodOutput.Text))
+                // 출고처가 FoodOutRequire에 있는지 확인
+                bool existsInRequire = DBManager.CheckOutputExists(foodOutput.Text);
+
+                if (existsInRequire)
                 {
-                    foodOutput.BackColor = Color.LightPink;
-                    toolTip1.SetToolTip(foodOutput, "출고 요청 내역에 없는 출고처입니다.");
-                }
-                // 출고처는 존재하지만 코드와의 조합이 맞지 않는 경우
-                else if (!string.IsNullOrWhiteSpace(foodCode.Text) &&
+                    // 출고처가 있는 경우, 코드와의 조합도 체크
+                    if (!string.IsNullOrWhiteSpace(foodCode.Text) &&
                         !DBManager.CheckOutputAndCodeExist(foodOutput.Text, foodCode.Text))
-                {
-                    foodOutput.BackColor = Color.LightPink;
-                    toolTip1.SetToolTip(foodOutput, "해당 출고처의 식자재 요청이 아닙니다.");
+                    {
+                        foodOutput.BackColor = Color.LightPink;
+                        toolTip1.SetToolTip(foodOutput, "해당 출고처의 식자재 요청이 아닙니다.");
+                    }
+                    else
+                    {
+                        foodOutput.BackColor = SystemColors.Window;
+                        toolTip1.SetToolTip(foodOutput, "");
+                    }
                 }
                 else
                 {
+                    // 출고처가 없는 경우는 그냥 통과
                     foodOutput.BackColor = SystemColors.Window;
                     toolTip1.SetToolTip(foodOutput, "");
                 }
