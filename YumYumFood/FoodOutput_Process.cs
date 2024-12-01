@@ -1,5 +1,4 @@
-﻿//조건검사 변경 및 추가 함수 목록: FoodCode_TextChanged, FoodQuantity_TextChanged, button1_Click
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,6 +31,9 @@ namespace YumYumFood
         private bool isValidQuantity = false;
 
         private bool isValidOutputCode = false;  // foodOutput과 foodCode 조합이 유효한지 확인, 241124추가
+
+        // FoodOutput_Process 클래스의 변수 추가
+        private bool isValidExpiryDate = false;
 
 
         public FoodOutput_Process()
@@ -104,6 +106,7 @@ namespace YumYumFood
         //주문 받는 과정이 프로그램에 없기 때문에 임시로 출고 필요 데이터 넣어줌(테스트 용도)
         private void label1_Click(object sender, EventArgs e)
         {
+
             try
             {
                 DBManager.InsertInitialData();
@@ -233,8 +236,18 @@ namespace YumYumFood
                 }
                 else
                 {
-                    foodCode.BackColor = SystemColors.Window;
-                    toolTip1.SetToolTip(foodCode, "");
+                    // 유통기한 체크 추가
+                    isValidExpiryDate = DBManager.CheckFoodExpiryDate(foodCode.Text);
+                    if (!isValidExpiryDate)
+                    {
+                        foodCode.BackColor = Color.LightPink;
+                        toolTip1.SetToolTip(foodCode, "유통기한이 지난 식자재입니다.");
+                    }
+                    else
+                    {
+                        foodCode.BackColor = SystemColors.Window;
+                        toolTip1.SetToolTip(foodCode, "");
+                    }
                 }
             }
             CheckOutputAndCode();
@@ -302,7 +315,6 @@ namespace YumYumFood
             UpdateButtonState();
         }
 
-
         //require 의존도를 더 낮췄음 241125추가
         private void CheckOutputAndCode()
         {
@@ -329,8 +341,7 @@ namespace YumYumFood
 
         private void UpdateButtonState()
         {
-            // 모든 조건을 만족해야 버튼 활성화
-            btnOk.Enabled = isValidFoodCode && isValidQuantity && isValidOutputCode;
+            btnOk.Enabled = isValidFoodCode && isValidQuantity && isValidOutputCode && isValidExpiryDate;
         }
 
         private void button2_Click(object sender, EventArgs e)

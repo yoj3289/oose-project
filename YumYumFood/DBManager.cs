@@ -1,4 +1,5 @@
-﻿using System;
+﻿//조건검사 변경 및 추가 함수 목록: CheckFoodCodeExists, GetActualFoodQuantity, GetFoodOutRequireData, GetFoodNameByCode, InsertInitialData
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,12 +13,13 @@ using System.Windows.Forms;  // 이 줄 추가
 public class DBManager
 {
     //공유 폴더의 ID와 password 참고, Nuget은 각자 다운로드 해야 함, DB가 폴더에 있어야 함
-    private static readonly string connectionString = "USER ID=fooduser;PASSWORD=1111;DATA SOURCE=localhost:1521/xe;";
+    private static readonly string connectionString = "USER ID=;PASSWORD=;DATA SOURCE=localhost:1521/xe;";
 
     public static OracleConnection GetConnection()
     {
         return new OracleConnection(connectionString);  // 매번 새로운 연결 생성
     }
+
 
     public static void InsertInitialData()
     {
@@ -72,6 +74,7 @@ public class DBManager
             }
         }
     }
+
     public static DataTable GetFoodOutRequireData()
     {
         DataTable dt = new DataTable();
@@ -217,7 +220,6 @@ public class DBManager
         }
     }
 
-
     //241125 추가
     public static void ProcessFoodOutRequire(string foodOutput, string foodCode, int processQuantity)
     {
@@ -330,6 +332,7 @@ public class DBManager
 
         return dt;
     }
+
 
     // foodCode 존재 여부 확인 - FoodInputDB 기준으로 변경
     public static bool CheckFoodCodeExists(string foodCode)
@@ -501,6 +504,29 @@ public class DBManager
 
                 // 실제 재고 = 입고 합계 - 출고 합계
                 return totalInput - totalOutput;
+            }
+        }
+    }
+
+    // DBManager 클래스에 추가할 메서드
+    public static bool CheckFoodExpiryDate(string foodCode)
+    {
+        using (OracleConnection conn = GetConnection())
+        {
+            conn.Open();
+            using (OracleCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = @"
+                SELECT COUNT(*)
+                FROM FoodInputDB
+                WHERE foodCode = :foodCode 
+                AND foodExpiryDatePrice <= TRUNC(SYSDATE)";
+
+                cmd.Parameters.Add(new OracleParameter("foodCode", foodCode));
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                // count가 0이면 유통기한이 지나지 않은 것
+                return count == 0;
             }
         }
     }
