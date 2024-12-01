@@ -84,5 +84,10 @@ namespace YumYumFood
             foodIn_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             foodIn_Grid.AllowUserToAddRows = false;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            RequestInputData();
+        }
     }
 }
