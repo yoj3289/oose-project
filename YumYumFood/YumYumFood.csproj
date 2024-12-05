@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="DBClass.cs" />
     <Compile Include="DBManager.cs" />
+    <Compile Include="DBTestData.cs" />
     <Compile Include="FoodInfo.cs" />
     <Compile Include="FoodInfoRow.cs" />
     <Compile Include="FoodInput_Process.cs">
