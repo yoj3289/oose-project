@@ -58,12 +58,13 @@ namespace YumYumFood
             table.Columns.Add("출고처", typeof(string));
             table.Columns.Add("식자재 번호", typeof(string));
             table.Columns.Add("수량", typeof(string));
-            table.Columns.Add("출고단가", typeof(string));
+            table.Columns.Add("입고단가", typeof(string));
         }
 
 
         private void FoodOutput_Process_Load(object sender, EventArgs e)
         {
+           
             InitializeDataTable();
             LoadData();
         }
@@ -106,10 +107,9 @@ namespace YumYumFood
         //주문 받는 과정이 프로그램에 없기 때문에 임시로 출고 필요 데이터 넣어줌(테스트 용도)
         private void label1_Click(object sender, EventArgs e)
         {
-
             try
             {
-                DBManager.InsertInitialData();
+                //DBManager.InsertInitialData();
                 MessageBox.Show("데이터 삽입 완료");
                 LoadData(); // 데이터 그리드 새로고침
             }
@@ -122,12 +122,11 @@ namespace YumYumFood
         //테스트 과정에서 매번 run sql 로그인하기 번거롭기 때문에 출고 필요 데이터 항목 초기화 위함
         private void label2_Click(object sender, EventArgs e)
         {
-
             try
             {
-                DBManager.ResetAllTables();
-                InitializeDataTable(); // 테이블 초기화
-                dataGridView1.DataSource = table; // 빈 테이블 바인딩
+                //DBManager.ResetAllTables();
+                //InitializeDataTable(); // 테이블 초기화
+                //dataGridView1.DataSource = table; // 빈 테이블 바인딩
                 MessageBox.Show("전체 초기화 완료");
             }
             catch (Exception ex)
@@ -218,6 +217,7 @@ namespace YumYumFood
 
         }
 
+
         private void FoodCode_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(foodCode.Text))
@@ -254,6 +254,7 @@ namespace YumYumFood
             UpdateButtonState();
         }
 
+       
         //241125추가
         private void FoodQuantity_TextChanged(object sender, EventArgs e)
         {
@@ -315,6 +316,7 @@ namespace YumYumFood
             UpdateButtonState();
         }
 
+
         //require 의존도를 더 낮췄음 241125추가
         private void CheckOutputAndCode()
         {
@@ -341,6 +343,8 @@ namespace YumYumFood
 
         private void UpdateButtonState()
         {
+            // 모든 조건을 만족해야 버튼 활성화
+            //btnOk.Enabled = isValidFoodCode && isValidQuantity && isValidOutputCode;
             btnOk.Enabled = isValidFoodCode && isValidQuantity && isValidOutputCode && isValidExpiryDate;
         }
 
@@ -348,6 +352,7 @@ namespace YumYumFood
         {
             Close();
         }
+
 
         private void foodOutput_TextChanged(object sender, EventArgs e)
         {

@@ -1,11 +1,9 @@
-﻿//조건검사 변경 및 추가 함수 목록: CheckFoodCodeExists, GetActualFoodQuantity, GetFoodOutRequireData, GetFoodNameByCode, InsertInitialData
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//using Oracle.ManagedDataAccess.Client;
 using Oracle.DataAccess.Client;
 using System.Data;
 using System.Windows.Forms;  // 이 줄 추가
@@ -13,67 +11,13 @@ using System.Windows.Forms;  // 이 줄 추가
 public class DBManager
 {
     //공유 폴더의 ID와 password 참고, Nuget은 각자 다운로드 해야 함, DB가 폴더에 있어야 함
-    private static readonly string connectionString = "USER ID=;PASSWORD=;DATA SOURCE=localhost:1521/xe;";
+    private static readonly string connectionString = "USER ID=fooduser;PASSWORD=1111;DATA SOURCE=localhost:1521/xe;";
 
     public static OracleConnection GetConnection()
     {
         return new OracleConnection(connectionString);  // 매번 새로운 연결 생성
     }
 
-
-    public static void InsertInitialData()
-    {
-        using (OracleConnection conn = GetConnection())
-        {
-            conn.Open();
-            using (OracleCommand cmd = conn.CreateCommand())
-            {
-                try
-                {
-                    // 트랜잭션 시작
-                    OracleTransaction transaction = conn.BeginTransaction();
-                    cmd.Transaction = transaction;
-
-                    // 기존 데이터 삭제
-                    cmd.CommandText = "DELETE FROM FoodOutputDB";
-                    cmd.ExecuteNonQuery();
-                    cmd.CommandText = "DELETE FROM FoodOutRequire";
-                    cmd.ExecuteNonQuery();
-                    cmd.CommandText = "DELETE FROM FoodInputDB";
-                    cmd.ExecuteNonQuery();
-                    cmd.CommandText = "DELETE FROM FoodDB";
-                    cmd.ExecuteNonQuery();
-
-                    // FoodInputDB 데이터 삽입
-                    cmd.CommandText = "INSERT INTO FoodInputDB VALUES(1, TO_DATE('2024-11-10', 'YYYY-MM-DD'), '우리과수원', 'F001', '사과', 100, 1500, TO_DATE('2024-11-20', 'YYYY-MM-DD'))";
-                    cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodInputDB VALUES(2, TO_DATE('2024-11-13', 'YYYY-MM-DD'), '꿀꿀농장', 'F002', '삼겹살', 250, 3500, TO_DATE('2024-11-25', 'YYYY-MM-DD'))";
-                    cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodInputDB VALUES(3, TO_DATE('2024-11-16', 'YYYY-MM-DD'), '토끼정원', 'F003', '당근', 300, 2500, TO_DATE('2024-11-27', 'YYYY-MM-DD'))";
-                    cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodInputDB VALUES(4, TO_DATE('2024-11-20', 'YYYY-MM-DD'), '우리농장', 'F004', '양파', 250, 2000, TO_DATE('2024-11-30', 'YYYY-MM-DD'))";
-                    cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodInputDB VALUES(5, TO_DATE('2024-11-25', 'YYYY-MM-DD'), '음메목장', 'F005', '우유', 400, 3000, TO_DATE('2024-11-30', 'YYYY-MM-DD'))";
-                    cmd.ExecuteNonQuery();
-
-                    // FoodOutRequire 데이터 삽입
-                    cmd.CommandText = "INSERT INTO FoodOutRequire VALUES ('F001', '2024-11-19', '사과', '세종상사', 150)";
-                    cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodOutRequire VALUES ('F003', '2024-11-20', '당근', '대한맛집', 250)";
-                    cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodOutRequire VALUES ('F005', '2024-11-21', '우유', '우리고기', 350)";
-                    cmd.ExecuteNonQuery();
-
-                    // 트랜잭션 커밋
-                    transaction.Commit();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("데이터 삽입 실패: " + ex.Message);
-                }
-            }
-        }
-    }
 
     public static DataTable GetFoodOutRequireData()
     {
@@ -530,4 +474,6 @@ public class DBManager
             }
         }
     }
+
+
 }

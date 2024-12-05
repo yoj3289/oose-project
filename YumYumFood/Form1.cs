@@ -78,7 +78,7 @@ namespace YumYumFood
         {
             try
             {
-                DBManager.InsertInitialData();
+                DBTestData.InsertInitialData();
                 MessageBox.Show("데이터 삽입 완료");
                 //LoadData(); // 데이터 그리드 새로고침
             }
