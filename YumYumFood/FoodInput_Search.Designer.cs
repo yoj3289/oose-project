@@ -50,20 +50,20 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("굴림", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label6.Font = new System.Drawing.Font("세방고딕 Regular", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label6.Location = new System.Drawing.Point(21, 24);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(124, 28);
+            this.label6.Size = new System.Drawing.Size(115, 33);
             this.label6.TabIndex = 41;
             this.label6.Text = "입고조회";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Font = new System.Drawing.Font("세방고딕 Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label1.Location = new System.Drawing.Point(976, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 24);
+            this.label1.Size = new System.Drawing.Size(78, 28);
             this.label1.TabIndex = 40;
             this.label1.Text = "입고처";
             // 
@@ -79,7 +79,7 @@
             // 
             this.button1.BackgroundImage = global::YumYumFood.Properties.Resources.pngegg__1_;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.Location = new System.Drawing.Point(162, 18);
+            this.button1.Location = new System.Drawing.Point(142, 21);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(44, 38);
             this.button1.TabIndex = 44;
@@ -110,7 +110,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.foodInput_text);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FoodInput_Search";
             this.Text = "FoodInput_Search";
             ((System.ComponentModel.ISupportInitialize)(this.foodIn_Grid)).EndInit();

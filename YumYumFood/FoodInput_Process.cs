@@ -92,38 +92,7 @@ namespace YumYumFood
 
         private bool AddInputData()
         {
-            // 1. foodCode 검사 (최대 20자)
-            string foodCode = foodCode_text.Text.Trim();
-            if (string.IsNullOrEmpty(foodCode) || foodCode.Length > 20)
-            {
-                MessageBox.Show("식자재 번호는 1~20자 사이로 입력해야 합니다.", "유효성 검사 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            // 2. foodExpiryDate 검사 (YYYY-MM-DD 형식)
-            string foodExpiryDate = foodExpiryDate_text.Text.Trim();
-            if (!Regex.IsMatch(foodExpiryDate, @"^\d{4}-\d{2}-\d{2}$"))
-            {
-                MessageBox.Show("유통기한은 YYYY-MM-DD 형식으로 입력해야 합니다.", "유효성 검사 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            // 날짜 형식 유효성 검사 추가 (정확한 날짜인지 확인)
-            if (!DateTime.TryParseExact(foodExpiryDate, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out _))
-            {
-                MessageBox.Show("유통기한은 올바른 날짜여야 합니다.", "유효성 검사 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            // 3. foodInPrice 검사 (숫자, 소수점 이하 2자리까지)
-            string foodInPrice = foodInPrice_text.Text.Trim();
-            if (!Regex.IsMatch(foodInPrice, @"^\d+(\.\d{1,2})?$"))
-            {
-                MessageBox.Show("입고 단가는 숫자로 입력하며 소수점은 최대 두 자리까지 가능합니다.", "유효성 검사 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            // 4. foodInput 검사 (최대 20자)
+            // 1. foodInput 검사 (최대 20자)
             string foodInput = foodInput_text.Text.Trim();
             if (string.IsNullOrEmpty(foodInput) || foodInput.Length > 20)
             {
@@ -131,7 +100,23 @@ namespace YumYumFood
                 return false;
             }
 
-            // 5. foodInQuantity 검사 (숫자, 최대 5자리)
+            // 2. foodCode 검사 (최대 20자)
+            string foodCode = foodCode_text.Text.Trim();
+            if (string.IsNullOrEmpty(foodCode) || foodCode.Length > 20)
+            {
+                MessageBox.Show("식자재 번호는 1~20자 사이로 입력해야 합니다.", "유효성 검사 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // 3. foodName 검사 (최대 20자)
+            string foodName = foodName_text.Text.Trim();
+            if (string.IsNullOrEmpty(foodName) || foodName.Length > 20)
+            {
+                MessageBox.Show("식자재이름은 1~20자 사이로 입력해야 합니다.", "유효성 검사 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }   
+
+            // 4. foodInQuantity 검사 (숫자, 최대 5자리)
             string foodInQuantity = foodInQuantity_text.Text.Trim();
             if (!Regex.IsMatch(foodInQuantity, @"^\d{1,5}$"))
             {
@@ -139,11 +124,26 @@ namespace YumYumFood
                 return false;
             }
 
-            // 4. foodName 검사 (최대 20자)
-            string foodName = foodName_text.Text.Trim();
-            if (string.IsNullOrEmpty(foodName) || foodName.Length > 20)
+            // 5. foodInPrice 검사 (숫자, 소수점 이하 2자리까지)
+            string foodInPrice = foodInPrice_text.Text.Trim();
+            if (!Regex.IsMatch(foodInPrice, @"^\d+(\.\d{1,2})?$"))
             {
-                MessageBox.Show("입고처는 1~20자 사이로 입력해야 합니다.", "유효성 검사 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("입고 단가는 숫자로 입력하며 소수점은 최대 두 자리까지 가능합니다.", "유효성 검사 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // 6. foodExpiryDate 검사 (YYYY-MM-DD 형식)
+            string foodExpiryDate = foodExpiryDate_text.Text.Trim();
+            if (!Regex.IsMatch(foodExpiryDate, @"^\d{4}-\d{2}-\d{2}$"))
+            {
+                MessageBox.Show("유통기한은 YYYY-MM-DD 형식으로 입력해야 합니다.", "유효성 검사 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // 7. 날짜 형식 유효성 검사 추가 (정확한 날짜인지 확인)
+            if (!DateTime.TryParseExact(foodExpiryDate, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out _))
+            {
+                MessageBox.Show("유통기한은 올바른 날짜여야 합니다.", "유효성 검사 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
