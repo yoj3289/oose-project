@@ -228,6 +228,27 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SalesFoodGrowth.resx">
+      <DependentUpon>SalesFoodGrowth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesFoodStatistics.resx">
+      <DependentUpon>SalesFoodStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInputGrowth.resx">
+      <DependentUpon>SalesInputGrowth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInputStatistics.resx">
+      <DependentUpon>SalesInputStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesMain.resx">
+      <DependentUpon>SalesMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesOutputGrowth.resx">
+      <DependentUpon>SalesOutputGrowth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesOutputStatistics.resx">
+      <DependentUpon>SalesOutputStatistics.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
     </None>

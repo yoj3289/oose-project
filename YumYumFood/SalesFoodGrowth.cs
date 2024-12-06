@@ -54,7 +54,7 @@ namespace YumYumFood
                     Text = text,
                     AutoSize = true,
                     Location = new Point(currentX, 0), // 수직 중앙 정렬
-                    Font = new Font("굴림", 16, FontStyle.Regular), // Font 설정
+                    Font = new Font("세방고딕 Regular", 16, FontStyle.Regular), // Font 설정
                     TextAlign = ContentAlignment.MiddleCenter // 텍스트 중앙 정렬
                 };
                 pnl_chart.Controls.Add(label); // 레이블 패널에 추가
@@ -69,7 +69,7 @@ namespace YumYumFood
                         Text = "→",
                         AutoSize = true,
                         Location = new Point(currentX, 0), // 수직 중앙 정렬
-                        Font = new Font("굴림", 16, FontStyle.Regular), // Font 설정
+                        Font = new Font("세방고딕 Regular", 16, FontStyle.Regular), // Font 설정
                         TextAlign = ContentAlignment.MiddleCenter // 텍스트 중앙 정렬
                     };
                     pnl_chart.Controls.Add(arrow);

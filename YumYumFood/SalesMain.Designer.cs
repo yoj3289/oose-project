@@ -33,18 +33,18 @@
             this.toSalesOutputStatisticsBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.lbl_best = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.lbl_worst = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toSalesFoodStatisticsBtn
             // 
-            this.toSalesFoodStatisticsBtn.Font = new System.Drawing.Font("굴림", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.toSalesFoodStatisticsBtn.Font = new System.Drawing.Font("세방고딕 Regular", 19.8F);
             this.toSalesFoodStatisticsBtn.Location = new System.Drawing.Point(12, 263);
             this.toSalesFoodStatisticsBtn.Name = "toSalesFoodStatisticsBtn";
             this.toSalesFoodStatisticsBtn.Size = new System.Drawing.Size(252, 175);
@@ -55,7 +55,7 @@
             // 
             // toSalesInputStatisticsBtn
             // 
-            this.toSalesInputStatisticsBtn.Font = new System.Drawing.Font("굴림", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.toSalesInputStatisticsBtn.Font = new System.Drawing.Font("세방고딕 Regular", 19.8F);
             this.toSalesInputStatisticsBtn.Location = new System.Drawing.Point(274, 263);
             this.toSalesInputStatisticsBtn.Name = "toSalesInputStatisticsBtn";
             this.toSalesInputStatisticsBtn.Size = new System.Drawing.Size(252, 175);
@@ -66,7 +66,7 @@
             // 
             // toSalesOutputStatisticsBtn
             // 
-            this.toSalesOutputStatisticsBtn.Font = new System.Drawing.Font("굴림", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.toSalesOutputStatisticsBtn.Font = new System.Drawing.Font("세방고딕 Regular", 19.8F);
             this.toSalesOutputStatisticsBtn.Location = new System.Drawing.Point(536, 263);
             this.toSalesOutputStatisticsBtn.Name = "toSalesOutputStatisticsBtn";
             this.toSalesOutputStatisticsBtn.Size = new System.Drawing.Size(252, 175);
@@ -77,7 +77,7 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("굴림", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Font = new System.Drawing.Font("세방고딕 Regular", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(776, 33);
@@ -95,6 +95,28 @@
             this.panel1.Size = new System.Drawing.Size(364, 175);
             this.panel1.TabIndex = 18;
             // 
+            // lbl_best
+            // 
+            this.lbl_best.Font = new System.Drawing.Font("세방고딕 Regular", 13.8F);
+            this.lbl_best.ForeColor = System.Drawing.Color.Blue;
+            this.lbl_best.Location = new System.Drawing.Point(3, 46);
+            this.lbl_best.Name = "lbl_best";
+            this.lbl_best.Size = new System.Drawing.Size(358, 113);
+            this.lbl_best.TabIndex = 1;
+            this.lbl_best.Text = "1.";
+            this.lbl_best.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("세방고딕 Regular", 13.8F);
+            this.label2.ForeColor = System.Drawing.Color.Blue;
+            this.label2.Location = new System.Drawing.Point(3, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(358, 23);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "BEST";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
@@ -105,42 +127,9 @@
             this.panel2.Size = new System.Drawing.Size(364, 175);
             this.panel2.TabIndex = 19;
             // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.ForeColor = System.Drawing.Color.Blue;
-            this.label2.Location = new System.Drawing.Point(3, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(358, 23);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "BEST";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label3
-            // 
-            this.label3.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(3, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(358, 23);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "WORST";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbl_best
-            // 
-            this.lbl_best.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lbl_best.ForeColor = System.Drawing.Color.Blue;
-            this.lbl_best.Location = new System.Drawing.Point(3, 46);
-            this.lbl_best.Name = "lbl_best";
-            this.lbl_best.Size = new System.Drawing.Size(358, 113);
-            this.lbl_best.TabIndex = 1;
-            this.lbl_best.Text = "1.";
-            this.lbl_best.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // lbl_worst
             // 
-            this.lbl_worst.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lbl_worst.Font = new System.Drawing.Font("세방고딕 Regular", 13.8F);
             this.lbl_worst.ForeColor = System.Drawing.Color.Red;
             this.lbl_worst.Location = new System.Drawing.Point(3, 46);
             this.lbl_worst.Name = "lbl_worst";
@@ -148,6 +137,17 @@
             this.lbl_worst.TabIndex = 2;
             this.lbl_worst.Text = "1.";
             this.lbl_worst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("세방고딕 Regular", 13.8F);
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(3, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(358, 23);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "WORST";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // SalesMain
             // 

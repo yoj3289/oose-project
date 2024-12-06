@@ -46,29 +46,29 @@
             // 
             // cb_group
             // 
-            this.cb_group.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.cb_group.Font = new System.Drawing.Font("세방고딕 Regular", 13.8F);
             this.cb_group.FormattingEnabled = true;
             this.cb_group.Items.AddRange(new object[] {
             "년",
             "월"});
             this.cb_group.Location = new System.Drawing.Point(67, 69);
             this.cb_group.Name = "cb_group";
-            this.cb_group.Size = new System.Drawing.Size(155, 31);
+            this.cb_group.Size = new System.Drawing.Size(155, 36);
             this.cb_group.TabIndex = 13;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.Font = new System.Drawing.Font("세방고딕 Regular", 12F);
             this.label2.Location = new System.Drawing.Point(12, 74);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 20);
+            this.label2.Size = new System.Drawing.Size(46, 24);
             this.label2.TabIndex = 12;
             this.label2.Text = "그룹";
             // 
             // btn_search
             // 
-            this.btn_search.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btn_search.Font = new System.Drawing.Font("세방고딕 Regular", 16.2F);
             this.btn_search.Location = new System.Drawing.Point(634, 62);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(115, 44);
@@ -80,7 +80,7 @@
             // lbl_title
             // 
             this.lbl_title.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lbl_title.Font = new System.Drawing.Font("굴림", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lbl_title.Font = new System.Drawing.Font("세방고딕 Regular", 19.8F, System.Drawing.FontStyle.Bold);
             this.lbl_title.Location = new System.Drawing.Point(12, 9);
             this.lbl_title.Name = "lbl_title";
             this.lbl_title.Size = new System.Drawing.Size(737, 50);

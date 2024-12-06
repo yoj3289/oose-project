@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbl_status = new System.Windows.Forms.Label();
             this.cb_sort = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,6 +45,7 @@
             // lbl_status
             // 
             this.lbl_status.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_status.Font = new System.Drawing.Font("세방고딕 Regular", 9F);
             this.lbl_status.Location = new System.Drawing.Point(493, 9);
             this.lbl_status.Name = "lbl_status";
             this.lbl_status.Size = new System.Drawing.Size(295, 62);
@@ -54,29 +55,29 @@
             // 
             // cb_sort
             // 
-            this.cb_sort.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.cb_sort.Font = new System.Drawing.Font("세방고딕 Regular", 13.8F);
             this.cb_sort.FormattingEnabled = true;
             this.cb_sort.Items.AddRange(new object[] {
             "매입처명",
             "매입가"});
             this.cb_sort.Location = new System.Drawing.Point(360, 81);
             this.cb_sort.Name = "cb_sort";
-            this.cb_sort.Size = new System.Drawing.Size(225, 31);
+            this.cb_sort.Size = new System.Drawing.Size(225, 36);
             this.cb_sort.TabIndex = 14;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label3.Font = new System.Drawing.Font("세방고딕 Regular", 12F);
             this.label3.Location = new System.Drawing.Point(258, 86);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 20);
+            this.label3.Size = new System.Drawing.Size(87, 24);
             this.label3.TabIndex = 13;
             this.label3.Text = "정렬 기준";
             // 
             // cb_group
             // 
-            this.cb_group.Font = new System.Drawing.Font("굴림", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.cb_group.Font = new System.Drawing.Font("세방고딕 Regular", 13.8F);
             this.cb_group.FormattingEnabled = true;
             this.cb_group.Items.AddRange(new object[] {
             "전체",
@@ -84,22 +85,22 @@
             "월"});
             this.cb_group.Location = new System.Drawing.Point(67, 81);
             this.cb_group.Name = "cb_group";
-            this.cb_group.Size = new System.Drawing.Size(155, 31);
+            this.cb_group.Size = new System.Drawing.Size(155, 36);
             this.cb_group.TabIndex = 12;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.Font = new System.Drawing.Font("세방고딕 Regular", 12F);
             this.label2.Location = new System.Drawing.Point(12, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 20);
+            this.label2.Size = new System.Drawing.Size(46, 24);
             this.label2.TabIndex = 11;
             this.label2.Text = "그룹";
             // 
             // btn_search
             // 
-            this.btn_search.Font = new System.Drawing.Font("굴림", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btn_search.Font = new System.Drawing.Font("세방고딕 Regular", 16.2F);
             this.btn_search.Location = new System.Drawing.Point(673, 74);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(115, 44);
@@ -133,8 +134,8 @@
             // 
             // input_price
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.input_price.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.input_price.DefaultCellStyle = dataGridViewCellStyle2;
             this.input_price.HeaderText = "매입가";
             this.input_price.MinimumWidth = 6;
             this.input_price.Name = "input_price";
@@ -145,10 +146,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("굴림", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Font = new System.Drawing.Font("세방고딕 Regular", 19.8F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(299, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(197, 33);
+            this.label1.Size = new System.Drawing.Size(182, 39);
             this.label1.TabIndex = 8;
             this.label1.Text = "매입처 통계";
             // 
