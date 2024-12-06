@@ -429,25 +429,28 @@ public class DBManager
             conn.Open();
             using (OracleCommand cmd = conn.CreateCommand())
             {
-                // 입고 수량 합계 조회
+                // 유통기한이 지나지 않은 입고 수량만 합계
                 cmd.CommandText = @"
                 SELECT COALESCE(SUM(foodInQuantity), 0)
-                FROM FoodInputDB 
-                WHERE foodCode = :foodCode";
+                FROM FoodInputDB
+                WHERE foodCode = :foodCode
+                AND foodExpiryDatePrice > TRUNC(SYSDATE)";
+
                 cmd.Parameters.Add(new OracleParameter("foodCode", foodCode));
-                int totalInput = Convert.ToInt32(cmd.ExecuteScalar());
+                int totalValidInput = Convert.ToInt32(cmd.ExecuteScalar());
 
                 // 출고 수량 합계 조회
                 cmd.Parameters.Clear();
                 cmd.CommandText = @"
                 SELECT COALESCE(SUM(foodQuantity), 0)
-                FROM FoodOutputDB 
+                FROM FoodOutputDB
                 WHERE foodCode = :foodCode";
+
                 cmd.Parameters.Add(new OracleParameter("foodCode", foodCode));
                 int totalOutput = Convert.ToInt32(cmd.ExecuteScalar());
 
-                // 실제 재고 = 입고 합계 - 출고 합계
-                return totalInput - totalOutput;
+                // 실제 가용 재고 = 유통기한 내 입고 합계 - 출고 합계
+                return Math.Max(0, totalValidInput - totalOutput);
             }
         }
     }
@@ -460,17 +463,19 @@ public class DBManager
             conn.Open();
             using (OracleCommand cmd = conn.CreateCommand())
             {
+                // 유통기한이 남은 재고가 있는지 확인
                 cmd.CommandText = @"
                 SELECT COUNT(*)
                 FROM FoodInputDB
-                WHERE foodCode = :foodCode 
-                AND foodExpiryDatePrice <= TRUNC(SYSDATE)";
+                WHERE foodCode = :foodCode
+                AND foodExpiryDatePrice > TRUNC(SYSDATE)
+                AND foodInQuantity > 0";  // 수량이 남아있는 것만 체크
 
                 cmd.Parameters.Add(new OracleParameter("foodCode", foodCode));
                 int count = Convert.ToInt32(cmd.ExecuteScalar());
 
-                // count가 0이면 유통기한이 지나지 않은 것
-                return count == 0;
+                // 유통기한이 남은 재고가 있으면 true
+                return count > 0;
             }
         }
     }
