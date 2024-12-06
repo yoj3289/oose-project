@@ -113,68 +113,45 @@ namespace YumYumFood
                     return;
                 }
 
-                // 입고와 출고 데이터를 기반으로 FoodDB 업데이트
+                // 업데이트 쿼리 실행
                 string updateQuery = @"
         UPDATE FoodDB f
         SET f.foodQuantity = (
-            NVL((SELECT SUM(fi.foodInQuantity) FROM FoodInputDB fi WHERE fi.foodCode = f.foodCode), 0) -
+            NVL((SELECT SUM(fi.foodInQuantity) FROM FoodInputDB fi WHERE fi.foodCode = f.foodCode), 0) - 
             NVL((SELECT SUM(fo.foodQuantity) FROM FoodOutputDB fo WHERE fo.foodCode = f.foodCode), 0)
         )";
-
                 db.ExecuteQuery(updateQuery); // FoodDB.foodQuantity 업데이트
 
-                // 검색 조건 생성
-                string condition = "1=1";
-                if (!string.IsNullOrEmpty(itemName))
-                {
-                    condition += $" AND UPPER(f.foodName) LIKE UPPER('%{itemName}%')";
-                }
-                if (!string.IsNullOrEmpty(itemCode))
-                {
-                    condition += $" AND f.foodCode LIKE '%{itemCode}%'";
-                }
-                if (!string.IsNullOrEmpty(date))
-                {
-                    if (DateTime.TryParse(date, out DateTime parsedDate))
-                    {
-                        condition += $" AND (TRUNC(fi.foodInDate) = TO_DATE('{parsedDate:yyyy-MM-dd}', 'YYYY-MM-DD') OR TRUNC(fo.foodOutDate) = TO_DATE('{parsedDate:yyyy-MM-dd}', 'YYYY-MM-DD'))";
-                    }
-                    else
-                    {
-                        MessageBox.Show("날짜 형식이 잘못되었습니다. YYYY-MM-DD 형식으로 입력해주세요.", "날짜 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                }
-
-                // 검색 쿼리 생성
+                // 검색 쿼리 실행
                 string query = $@"
         SELECT 
-            fi.foodInDate AS 입고일자,
-            fi.foodInPut AS 입고처,
-            fo.foodOutDate AS 출고일자,
-            fo.foodOutput AS 출고처,
+            NVL(TO_CHAR(fi.foodInDate, 'YYYY-MM-DD'), '없음') AS 입고일자,
+            NVL(fi.foodInPut, '없음') AS 입고처,
+            NVL(TO_CHAR(fo.foodOutDate, 'YYYY-MM-DD'), '미처리') AS 출고일자,
+            NVL(fo.foodOutput, '미처리') AS 출고처,
             f.foodCode AS 식자재번호,
             f.foodName AS 식자재이름,
             f.foodQuantity AS 현재수량,
-            f.foodExpiryDate AS 유통기한
+            NVL(TO_CHAR(f.foodExpiryDate, 'YYYY-MM-DD'), '없음') AS 유통기한
         FROM 
             FoodDB f
         LEFT JOIN FoodInputDB fi ON f.foodCode = fi.foodCode
         LEFT JOIN FoodOutputDB fo ON f.foodCode = fo.foodCode
-        WHERE {condition}
-        GROUP BY 
-            fi.foodInDate, fi.foodInPut, fo.foodOutDate, fo.foodOutput, f.foodCode, f.foodName, f.foodExpiryDate, f.foodQuantity";
-
+        WHERE 
+            f.foodQuantity > 0
+            {(!string.IsNullOrEmpty(itemName) ? $" AND UPPER(f.foodName) LIKE UPPER('%{itemName}%')" : "")}
+            {(!string.IsNullOrEmpty(itemCode) ? $" AND f.foodCode LIKE '%{itemCode}%'" : "")}
+            {(DateTime.TryParse(date, out DateTime parsedDate) ? $" AND (TRUNC(fi.foodInDate) = TO_DATE('{parsedDate:yyyy-MM-dd}', 'YYYY-MM-DD') OR TRUNC(fo.foodOutDate) = TO_DATE('{parsedDate:yyyy-MM-dd}', 'YYYY-MM-DD'))" : "")}";
                 DataTable resultTable = db.ExecuteQuery(query);
-                dataGridView1.DataSource = resultTable;
 
-                if (resultTable.Rows.Count > 0)
+                if (resultTable == null || resultTable.Rows.Count == 0)
                 {
-                    MessageBox.Show($"총 {resultTable.Rows.Count}개의 결과가 검색되었습니다.", "검색 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("검색 결과가 없습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("검색 결과가 없습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dataGridView1.DataSource = resultTable;
+                    MessageBox.Show($"총 {resultTable.Rows.Count}개의 결과가 검색되었습니다.", "검색 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -182,6 +159,9 @@ namespace YumYumFood
                 MessageBox.Show($"검색 중 오류 발생: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
 
         private void btnAlarm_Click(object sender, EventArgs e)
         {
