@@ -43,17 +43,18 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(47, 161);
+            this.dataGridView1.Location = new System.Drawing.Point(47, 109);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(706, 244);
+            this.dataGridView1.Size = new System.Drawing.Size(706, 364);
             this.dataGridView1.TabIndex = 26;
             // 
             // btnAlarm
             // 
-            this.btnAlarm.Location = new System.Drawing.Point(678, 132);
+            this.btnAlarm.Font = new System.Drawing.Font("세방고딕 Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnAlarm.Location = new System.Drawing.Point(678, 76);
             this.btnAlarm.Name = "btnAlarm";
-            this.btnAlarm.Size = new System.Drawing.Size(75, 23);
+            this.btnAlarm.Size = new System.Drawing.Size(75, 27);
             this.btnAlarm.TabIndex = 25;
             this.btnAlarm.Text = "알람";
             this.btnAlarm.UseVisualStyleBackColor = true;
@@ -61,9 +62,10 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(539, 59);
+            this.btnSearch.Font = new System.Drawing.Font("세방고딕 Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnSearch.Location = new System.Drawing.Point(547, 76);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.Size = new System.Drawing.Size(75, 27);
             this.btnSearch.TabIndex = 24;
             this.btnSearch.Text = "검색";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -72,56 +74,59 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(403, 46);
+            this.label3.Font = new System.Drawing.Font("세방고딕 Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label3.Location = new System.Drawing.Point(412, 54);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.Size = new System.Drawing.Size(39, 19);
             this.label3.TabIndex = 23;
             this.label3.Text = "날짜";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(234, 46);
+            this.label2.Font = new System.Drawing.Font("세방고딕 Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.Location = new System.Drawing.Point(229, 54);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.Size = new System.Drawing.Size(69, 19);
             this.label2.TabIndex = 22;
             this.label2.Text = "물품코드";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(75, 46);
+            this.label1.Font = new System.Drawing.Font("세방고딕 Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Location = new System.Drawing.Point(71, 54);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.Size = new System.Drawing.Size(54, 19);
             this.label1.TabIndex = 21;
             this.label1.Text = "물품명";
             // 
             // txtDate
             // 
-            this.txtDate.Location = new System.Drawing.Point(367, 61);
+            this.txtDate.Location = new System.Drawing.Point(381, 76);
             this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(100, 21);
+            this.txtDate.Size = new System.Drawing.Size(100, 22);
             this.txtDate.TabIndex = 20;
             // 
             // txtItemCode
             // 
-            this.txtItemCode.Location = new System.Drawing.Point(208, 61);
+            this.txtItemCode.Location = new System.Drawing.Point(212, 76);
             this.txtItemCode.Name = "txtItemCode";
-            this.txtItemCode.Size = new System.Drawing.Size(100, 21);
+            this.txtItemCode.Size = new System.Drawing.Size(100, 22);
             this.txtItemCode.TabIndex = 19;
             // 
             // txtItemName
             // 
-            this.txtItemName.Location = new System.Drawing.Point(47, 61);
+            this.txtItemName.Location = new System.Drawing.Point(47, 76);
             this.txtItemName.Name = "txtItemName";
-            this.txtItemName.Size = new System.Drawing.Size(100, 21);
+            this.txtItemName.Size = new System.Drawing.Size(100, 22);
             this.txtItemName.TabIndex = 18;
             // 
             // FoodManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 525);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnAlarm);
             this.Controls.Add(this.btnSearch);
@@ -131,6 +136,7 @@
             this.Controls.Add(this.txtDate);
             this.Controls.Add(this.txtItemCode);
             this.Controls.Add(this.txtItemName);
+            this.Font = new System.Drawing.Font("세방고딕 Regular", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Name = "FoodManagement";
             this.Text = "FoodManagement";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
