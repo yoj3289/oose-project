@@ -234,7 +234,7 @@ namespace YumYumFood
         {
             foreach (var i in processingList)
             {
-                i.SetFoodDiffrence(i.GetFoodInPrice() - i.GetFoodOutPrice());
+                i.SetFoodDiffrence(i.GetFoodOutPrice() - i.GetFoodInPrice());
             }
         }
 

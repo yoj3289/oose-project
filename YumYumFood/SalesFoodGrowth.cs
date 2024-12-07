@@ -167,7 +167,7 @@ namespace YumYumFood
             {
                 FoodInfoRow entry = groupedData[key];
 
-                int difference = entry.GetFoodInPrice() - entry.GetFoodOutPrice(); // 현재 그룹의 차액
+                int difference = entry.GetFoodOutPrice() - entry.GetFoodInPrice(); // 현재 그룹의 차액
 
                 int change = difference - previousDifference; // 전 그룹 대비 차액 차이값
                 previousDifference = difference;
