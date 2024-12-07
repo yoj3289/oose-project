@@ -69,10 +69,10 @@
             // 
             // foodInput_text
             // 
-            this.foodInput_text.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.foodInput_text.Font = new System.Drawing.Font("세방고딕 Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.foodInput_text.Location = new System.Drawing.Point(1073, 21);
             this.foodInput_text.Name = "foodInput_text";
-            this.foodInput_text.Size = new System.Drawing.Size(150, 35);
+            this.foodInput_text.Size = new System.Drawing.Size(150, 36);
             this.foodInput_text.TabIndex = 39;
             // 
             // button1

@@ -57,11 +57,11 @@
             // 
             // foodName_text
             // 
-            this.foodName_text.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.foodName_text.Font = new System.Drawing.Font("세방고딕 Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.foodName_text.Location = new System.Drawing.Point(200, 240);
             this.foodName_text.Name = "foodName_text";
-            this.foodName_text.Size = new System.Drawing.Size(150, 35);
-            this.foodName_text.TabIndex = 60;
+            this.foodName_text.Size = new System.Drawing.Size(150, 36);
+            this.foodName_text.TabIndex = 2;
             // 
             // Search
             // 
@@ -107,11 +107,11 @@
             // 
             // foodExpiryDate_text
             // 
-            this.foodExpiryDate_text.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.foodExpiryDate_text.Font = new System.Drawing.Font("세방고딕 Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.foodExpiryDate_text.Location = new System.Drawing.Point(200, 410);
             this.foodExpiryDate_text.Name = "foodExpiryDate_text";
-            this.foodExpiryDate_text.Size = new System.Drawing.Size(150, 35);
-            this.foodExpiryDate_text.TabIndex = 55;
+            this.foodExpiryDate_text.Size = new System.Drawing.Size(150, 36);
+            this.foodExpiryDate_text.TabIndex = 5;
             // 
             // label4
             // 
@@ -125,11 +125,11 @@
             // 
             // foodInPrice_text
             // 
-            this.foodInPrice_text.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.foodInPrice_text.Font = new System.Drawing.Font("세방고딕 Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.foodInPrice_text.Location = new System.Drawing.Point(200, 351);
             this.foodInPrice_text.Name = "foodInPrice_text";
-            this.foodInPrice_text.Size = new System.Drawing.Size(150, 35);
-            this.foodInPrice_text.TabIndex = 53;
+            this.foodInPrice_text.Size = new System.Drawing.Size(150, 36);
+            this.foodInPrice_text.TabIndex = 4;
             // 
             // label3
             // 
@@ -143,11 +143,11 @@
             // 
             // foodInQuantity_text
             // 
-            this.foodInQuantity_text.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.foodInQuantity_text.Font = new System.Drawing.Font("세방고딕 Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.foodInQuantity_text.Location = new System.Drawing.Point(200, 294);
             this.foodInQuantity_text.Name = "foodInQuantity_text";
-            this.foodInQuantity_text.Size = new System.Drawing.Size(150, 35);
-            this.foodInQuantity_text.TabIndex = 51;
+            this.foodInQuantity_text.Size = new System.Drawing.Size(150, 36);
+            this.foodInQuantity_text.TabIndex = 3;
             // 
             // label2
             // 
@@ -161,11 +161,11 @@
             // 
             // foodCode_text
             // 
-            this.foodCode_text.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.foodCode_text.Font = new System.Drawing.Font("세방고딕 Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.foodCode_text.Location = new System.Drawing.Point(200, 178);
             this.foodCode_text.Name = "foodCode_text";
-            this.foodCode_text.Size = new System.Drawing.Size(150, 35);
-            this.foodCode_text.TabIndex = 49;
+            this.foodCode_text.Size = new System.Drawing.Size(150, 36);
+            this.foodCode_text.TabIndex = 1;
             // 
             // label1
             // 
@@ -179,11 +179,11 @@
             // 
             // foodInput_text
             // 
-            this.foodInput_text.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.foodInput_text.Font = new System.Drawing.Font("세방고딕 Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.foodInput_text.Location = new System.Drawing.Point(200, 118);
             this.foodInput_text.Name = "foodInput_text";
-            this.foodInput_text.Size = new System.Drawing.Size(150, 35);
-            this.foodInput_text.TabIndex = 47;
+            this.foodInput_text.Size = new System.Drawing.Size(150, 36);
+            this.foodInput_text.TabIndex = 0;
             // 
             // FoodInput_Process
             // 
@@ -205,7 +205,7 @@
             this.Controls.Add(this.foodCode_text);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.foodInput_text);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FoodInput_Process";
             this.Text = "FoodInput_Process";
             this.ResumeLayout(false);
