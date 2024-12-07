@@ -192,16 +192,25 @@ public class DBTestData
 
                     //FoodOutputDB 데이터 삽입
                     // 사과 출고 데이터 (F001) - 입고가 2000~2200원 대비 3000~3500원으로 출고
-                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (31, '서울식당', TO_DATE('2023-06-01', 'YYYY-MM-DD'), 'F001', '사과', 45, 2800)";
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (31, '서울식당', TO_DATE('2023-06-01', 'YYYY-MM-DD'), 'F001', '사과', 45, 3140)";
                     cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (32, '부산식당', TO_DATE('2023-09-01', 'YYYY-MM-DD'), 'F001', '사과', 50, 2900)";
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (32, '부산식당', TO_DATE('2023-09-01', 'YYYY-MM-DD'), 'F001', '사과', 50, 3180)";
                     cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (1, '서울식당', TO_DATE('2024-01-20', 'YYYY-MM-DD'), 'F001', '사과', 50, 3000)";
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (1, '서울식당', TO_DATE('2024-01-20', 'YYYY-MM-DD'), 'F001', '사과', 50, 3250)";
                     cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (2, '부산식당', TO_DATE('2024-02-20', 'YYYY-MM-DD'), 'F001', '사과', 40, 3200)";
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (2, '부산식당', TO_DATE('2024-02-20', 'YYYY-MM-DD'), 'F001', '사과', 40, 3250)";
                     cmd.ExecuteNonQuery();
                     cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (3, '대구식당', TO_DATE('2024-03-20', 'YYYY-MM-DD'), 'F001', '사과', 45, 3300)";
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (41, '속초식당', TO_DATE('2024-05-10', 'YYYY-MM-DD'), 'F001', '사과', 80, 3400)";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (42, '수원식당', TO_DATE('2024-05-20', 'YYYY-MM-DD'), 'F001', '사과', 160, 3460)";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (43, '서울식당', TO_DATE('2024-07-01', 'YYYY-MM-DD'), 'F001', '사과', 150, 3400)";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (44, '화성식당', TO_DATE('2024-08-30', 'YYYY-MM-DD'), 'F001', '사과', 180, 3450)";
                     cmd.ExecuteNonQuery();
 
                     // 돼지고기 출고 데이터 (F002) - 입고가 7800~8200원 대비 11000~12000원으로 출고
@@ -245,16 +254,25 @@ public class DBTestData
                     cmd.ExecuteNonQuery();
 
                     // 고등어 출고 데이터 (F007) - 입고가 3900~4200원 대비 5500~6000원으로 출고
-                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (39, '성남식당', TO_DATE('2023-07-15', 'YYYY-MM-DD'), 'F007', '고등어', 40, 5300)";
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (39, '성남식당', TO_DATE('2023-07-15', 'YYYY-MM-DD'), 'F007', '고등어', 40, 5500)";
                     cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (40, '안양식당', TO_DATE('2023-10-15', 'YYYY-MM-DD'), 'F007', '고등어', 45, 5400)";
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (40, '안양식당', TO_DATE('2023-10-15', 'YYYY-MM-DD'), 'F007', '고등어', 45, 5500)";
                     cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (13, '성남식당', TO_DATE('2024-01-15', 'YYYY-MM-DD'), 'F007', '고등어', 50, 5500)";
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (13, '성남식당', TO_DATE('2024-01-15', 'YYYY-MM-DD'), 'F007', '고등어', 50, 5750)";
                     cmd.ExecuteNonQuery();
                     cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (14, '안산식당', TO_DATE('2024-02-15', 'YYYY-MM-DD'), 'F007', '고등어', 45, 5800)";
                     cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (15, '화성식당', TO_DATE('2024-03-15', 'YYYY-MM-DD'), 'F007', '고등어', 48, 6000)";
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (15, '화성식당', TO_DATE('2024-03-15', 'YYYY-MM-DD'), 'F007', '고등어', 48, 5900)";
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (45, '시흥식당', TO_DATE('2024-08-10', 'YYYY-MM-DD'), 'F007', '고등어', 180, 5900)";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (46, '하남식당', TO_DATE('2024-08-20', 'YYYY-MM-DD'), 'F007', '고등어', 165, 5900)";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (47, '파주식당', TO_DATE('2024-08-30', 'YYYY-MM-DD'), 'F007', '고등어', 100, 5950)";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (48, '의정부식당', TO_DATE('2024-10-05', 'YYYY-MM-DD'), 'F007', '고등어', 180, 5950)";
                     cmd.ExecuteNonQuery();
 
                     // 두부 출고 데이터 (F008) - 입고가 1750~1900원 대비 2500~3000원으로 출고
@@ -290,11 +308,20 @@ public class DBTestData
                     cmd.ExecuteNonQuery();
 
                     // 두릅 출고 데이터 (F012) - 입고가 5900~6200원 대비 8000~8500원으로 출고
-                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (28, '광명식당', TO_DATE('2024-01-30', 'YYYY-MM-DD'), 'F012', '두릅', 25, 8000)";
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (28, '광명식당', TO_DATE('2024-01-30', 'YYYY-MM-DD'), 'F012', '두릅', 25, 8390)";
                     cmd.ExecuteNonQuery();
-                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (29, '과천식당', TO_DATE('2024-02-28', 'YYYY-MM-DD'), 'F012', '두릅', 20, 8200)";
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (29, '과천식당', TO_DATE('2024-02-28', 'YYYY-MM-DD'), 'F012', '두릅', 20, 8410)";
                     cmd.ExecuteNonQuery();
                     cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (30, '양주식당', TO_DATE('2024-03-30', 'YYYY-MM-DD'), 'F012', '두릅', 22, 8500)";
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (49, '고양식당', TO_DATE('2024-06-10', 'YYYY-MM-DD'), 'F012', '두릅', 60, 8480)";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (50, '군포식당', TO_DATE('2024-06-20', 'YYYY-MM-DD'), 'F012', '두릅', 100, 8420)";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (51, '하남식당', TO_DATE('2024-10-01', 'YYYY-MM-DD'), 'F012', '두릅', 100, 8420)";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "INSERT INTO FoodOutputDB (foodOutID, foodOutput, foodOutDate, foodCode, foodName, foodQuantity, foodOutPrice) VALUES (52, '김포식당', TO_DATE('2024-10-05', 'YYYY-MM-DD'), 'F012', '두릅', 60, 8480)";
                     cmd.ExecuteNonQuery();
 
                     // 유통기한 12월 11일 이전 데이터 (8개)
