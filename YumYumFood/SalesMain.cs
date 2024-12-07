@@ -82,7 +82,7 @@ namespace YumYumFood
                         int inputTotal = inputDict.ContainsKey(name) ? inputDict[name] : 0;
                         int outputTotal = outputDict.ContainsKey(name) ? outputDict[name] : 0;
 
-                        int difference = inputTotal - outputTotal;
+                        int difference = outputTotal - inputTotal;
 
                         // 결과 리스트에 추가
                         resultList.Add($"{name}: {difference}");
